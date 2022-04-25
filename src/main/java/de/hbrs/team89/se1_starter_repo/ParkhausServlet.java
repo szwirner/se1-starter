@@ -41,8 +41,8 @@ public abstract class ParkhausServlet extends HttpServlet {
             case "sum":
                 // ToDo: insert algorithm for calculating sum here
                 double totalPrice = 0.0;
-                for(int i = 0; i < cars().size(); i++) {
-                    totalPrice += cars().get(i).price();
+                for (CarIF car:cars()) {
+                    totalPrice += car.price();
                 }
                 out.println( "sum in cent = " + totalPrice);
                 break;
