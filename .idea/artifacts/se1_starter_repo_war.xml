@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="se1-starter-repo-1.0-SNAPSHOT.war">
+    <root id="archive" name="Team_30-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="se1-starter-repo:war exploded" />
     </root>
   </artifact>
