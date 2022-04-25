@@ -39,15 +39,19 @@ public abstract class ParkhausServlet extends HttpServlet {
                 out.println( config() );
                 break;
             case "sum":
-                // ToDo: insert algorithm for calculating sum here
-                double totalPrice = 0.0;
-                for (CarIF car:cars()) {
-                    totalPrice += car.price();
-                }
-                out.println( "sum in cent = " + totalPrice);
+                //When the sum was saved in the context, get it from there instead
+                out.println( "sum in cent = " + getSum());
                 break;
             case "avg":
-                // ToDo
+                //When we found out how to store things in the context, store it there instead.
+                int numberOfCars = 0;
+                for (CarIF car:cars()) {
+                    numberOfCars++;
+                }
+                if(numberOfCars == 0) {
+                    numberOfCars = 1;
+                }
+                out.println( "avg in cent = " + getSum()/numberOfCars);
                 break;
             case "min":
                 // ToDo: insert algorithm for calculating min here
@@ -107,7 +111,7 @@ public abstract class ParkhausServlet extends HttpServlet {
                         price = (double)new Scanner( priceString ).useDelimiter("\\D+").nextInt();
                         price /= 100.0d;  // just as Integer.parseInt( priceString ) / 100.0d;
                         // store new sum in ServletContext
-                        // ToDo getContext().setAttribute("sum"+NAME(), getSum() + price );
+                        getContext().setAttribute("sum"+NAME(), getSum() + price );
                     }
                 }
                 out.println( price );  // server calculated price
@@ -130,6 +134,18 @@ public abstract class ParkhausServlet extends HttpServlet {
 
 
     // auxiliary methods used in HTTP request processing
+
+    /**
+     * Calculate the total sum paid by all cars
+     * @return double totalPrice
+     */
+    double getSum() {
+        double totalPrice = 0.0;
+        for (CarIF car:cars()) {
+            totalPrice += car.price();
+        }
+        return totalPrice;
+    }
 
     /**
      * @return the servlet context
