@@ -40,7 +40,11 @@ public abstract class ParkhausServlet extends HttpServlet {
                 break;
             case "sum":
                 // ToDo: insert algorithm for calculating sum here
-                out.println( "sum = server side calculated sum" );
+                double totalPrice = 0.0;
+                for(int i = 0; i < cars().size(); i++) {
+                    totalPrice += cars().get(i).price();
+                }
+                out.println( "sum in cent = " + totalPrice);
                 break;
             case "avg":
                 // ToDo

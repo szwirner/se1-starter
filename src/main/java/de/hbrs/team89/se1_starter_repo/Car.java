@@ -1,6 +1,7 @@
 package de.hbrs.team89.se1_starter_repo;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 // ToDo replace 0 by correct values read from this.params
 public class Car implements CarIF {
@@ -31,7 +32,16 @@ public class Car implements CarIF {
 
     @Override
     public int price() {
-        return 0;
+        //Vorläufige Implementation. Sollte eigentlich im Servlet sein.
+        double price = 0.0d;
+        if ( params.length > 4 ){
+            String priceString = params[3];
+            if ( ! "_".equals( priceString ) ){
+                price = (double)new Scanner( priceString ).useDelimiter("\\D+").nextInt();
+            }
+        }
+        int priceInt = (int) price;
+        return priceInt;
     }
 
     @Override
