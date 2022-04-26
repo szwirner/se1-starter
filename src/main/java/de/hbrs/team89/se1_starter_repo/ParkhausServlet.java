@@ -148,6 +148,27 @@ public abstract class ParkhausServlet extends HttpServlet {
     }
 
     /**
+     * Calculate the median price paid by all cars
+     * @return double medianPrice
+     */
+    double getMedian() {
+        double[] prices = new double[cars().size()];
+        int i = 0;
+        for (CarIF car:cars()) {
+            prices[i] = car.price();
+            i++;
+        }
+        Arrays.sort(prices);
+        double medianPrice;
+        if(prices.length % 2 == 1){
+            medianPrice = prices[prices.length/2];
+        } else {
+            medianPrice = (prices[prices.length/2] + prices[prices.length/2+1])/2;
+        }
+        return medianPrice;
+    }
+
+    /**
      * @return the servlet context
      */
     ServletContext getContext(){
