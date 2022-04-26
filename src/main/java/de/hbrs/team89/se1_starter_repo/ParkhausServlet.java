@@ -23,6 +23,10 @@ public abstract class ParkhausServlet extends HttpServlet {
     abstract int MAX(); // maximum number of parking slots of a single parking level
     abstract String config(); // configuration of a single parking level
 
+    public void init() throws ServletException {
+        getContext().setAttribute("sum"+NAME(), 0.0d);
+    }
+
     /**
      * HTTP GET
      */
@@ -40,7 +44,8 @@ public abstract class ParkhausServlet extends HttpServlet {
                 break;
             case "sum":
                 //When the sum was saved in the context, get it from there instead
-                out.println( "sum in cent = " + getSum());
+                double sum = (double) getContext().getAttribute("sum"+NAME());
+                out.println( "sum in cent = " + sum);
                 break;
             case "avg":
                 //When we found out how to store things in the context, store it there instead.
@@ -136,15 +141,10 @@ public abstract class ParkhausServlet extends HttpServlet {
     // auxiliary methods used in HTTP request processing
 
     /**
-     * Calculate the total sum paid by all cars
-     * @return double totalPrice
+     * Return the sum paid from context
      */
     double getSum() {
-        double totalPrice = 0.0;
-        for (CarIF car:cars()) {
-            totalPrice += car.price();
-        }
-        return totalPrice;
+        return (double) getContext().getAttribute("sum"+NAME());
     }
 
     /**

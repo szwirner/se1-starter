@@ -32,16 +32,7 @@ public class Car implements CarIF {
 
     @Override
     public int price() {
-        //Vorläufige Implementation. Sollte eigentlich im Servlet sein.
-        double price = 0.0d;
-        if ( params.length > 4 ){
-            String priceString = params[3];
-            if ( ! "_".equals( priceString ) ){
-                price = (double)new Scanner( priceString ).useDelimiter("\\D+").nextInt();
-            }
-        }
-        int priceInt = (int) price;
-        return priceInt;
+        return 0;
     }
 
     @Override
